@@ -85,6 +85,7 @@ public class DepartmentListController implements Initializable {
 			
 			DepartmentFormController controller = loader.getController(); // Pegou o controlador que instanciamos nas linhas acima
 			controller.setDepartment(obj);
+			controller.setDepartmentService(new DepartmentService());
 			controller.updateFormData();
 			
 			// Quando vamos criar uma janela modal, na frente de uma janela existente, é preciso instanciar um novo stage (um palco na frente do outro)
