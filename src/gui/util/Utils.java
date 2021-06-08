@@ -30,6 +30,15 @@ public class Utils {
 				return null;
 			}
 		}
+		// método para converter um string em double, se der alguma exceção, retorna nulo
+		public static Double tryParseToDouble(String str) {
+			try {
+				return Double.parseDouble(str);
+			}
+			catch(NumberFormatException e) {
+				return null;
+			}
+		}
 		
 		// método para formatar data
 		public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
