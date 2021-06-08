@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +27,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
 import model.services.SellerService;
@@ -98,28 +103,28 @@ public class SellerListController implements Initializable, DataChangeListener {
 	
 	// Função para carregar a janela do formulário para o preenchimento de departamento
 	private void createDialogForm(Seller obj, String absoluteName, Stage parentStage) {
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//			Pane pane = loader.load();
-//			
-//			SellerFormController controller = loader.getController(); // Pegou o controlador que instanciamos nas linhas acima
-//			controller.setSeller(obj);
-//			controller.setSellerService(new SellerService());
-//			controller.subscribeDataChangeListener(this);
-//			controller.updateFormData();
-//			
-//			// Quando vamos criar uma janela modal, na frente de uma janela existente, é preciso instanciar um novo stage (um palco na frente do outro)
-//			Stage dialogStage = new Stage();
-//			dialogStage.setTitle("Enter seller data");
-//			dialogStage.setScene(new Scene(pane));// setando uma nova scene (como é um novo stage, vai ser uma nova scene)  passando o nosso pane.
-//			dialogStage.setResizable(false); // A janela não pode ser redimencionada
-//			dialogStage.initOwner(parentStage);
-//			dialogStage.initModality(Modality.WINDOW_MODAL); // Definando que a janela será do tipo modal
-//			dialogStage.showAndWait();
-//		}
-//		catch (IOException e) {
-//			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
-//		}
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+			
+			SellerFormController controller = loader.getController(); // Pegou o controlador que instanciamos nas linhas acima
+			controller.setSeller(obj);
+			controller.setSellerService(new SellerService());
+			controller.subscribeDataChangeListener(this);
+			controller.updateFormData();
+			
+			// Quando vamos criar uma janela modal, na frente de uma janela existente, é preciso instanciar um novo stage (um palco na frente do outro)
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Enter seller data");
+			dialogStage.setScene(new Scene(pane));// setando uma nova scene (como é um novo stage, vai ser uma nova scene)  passando o nosso pane.
+			dialogStage.setResizable(false); // A janela não pode ser redimencionada
+			dialogStage.initOwner(parentStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL); // Definando que a janela será do tipo modal
+			dialogStage.showAndWait();
+		}
+		catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
+		}
 	}
 
 	@Override
